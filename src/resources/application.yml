@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: freight-portal-backend
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/freight_portal
+      database: freight_portal
+  profiles:
+    active: dev
+
+logging:
+  level:
+    com.freightportal: DEBUG
+    org.springframework.data.mongodb: DEBUG
+
+app:
+  jwt:
+    secret: mySecretKey
+    expiration: 86400000 # 24 hours
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/freight_portal_dev
+      database: freight_portal_dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+      database: freight_portal_prod
