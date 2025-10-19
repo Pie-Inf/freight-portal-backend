@@ -1,5 +1,18 @@
 package com.freightportal.model;
 
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import lombok.*;
+
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 @Document(collection = "fleets")
 @Data
 @NoArgsConstructor
@@ -39,31 +52,3 @@ public class Fleet {
     private LocalDateTime updatedAt;
 }
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Vehicle {
-    private String type; // truck, van, trailer
-    private String make;
-    private String model;
-    private int year;
-    private String plateNumber;
-    private double maxWeight;
-    private Dimensions maxDimensions;
-    private List<String> equipment; // GPS, refrigeration, etc.
-}
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Driver {
-    private String name;
-    private String licenseNumber;
-    private String phone;
-    private String email;
-    private List<String> certifications;
-}
-
-public enum FleetStatus {
-    AVAILABLE, ASSIGNED, IN_TRANSIT, MAINTENANCE, OFFLINE
-}

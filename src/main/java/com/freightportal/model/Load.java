@@ -2,12 +2,19 @@ package com.freightportal.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.freightportal.model.LoadStatus;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
 
 @Document(collection = "loads")
 @Data
@@ -57,40 +64,3 @@ public class Load {
     private LocalDateTime updatedAt;
 }
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Location {
-    private String address;
-    private String city;
-    private String state;
-    private String zipCode;
-    private String country;
-    private double[] coordinates; // [longitude, latitude] for MongoDB geospatial
-}
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Cargo {
-    private String type;
-    private double weight;
-    private String weightUnit = "lbs";
-    private Dimensions dimensions;
-    private String description;
-    private List<String> specialHandling;
-}
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Dimensions {
-    private double length;
-    private double width;
-    private double height;
-    private String unit = "ft";
-}
-
-public enum LoadStatus {
-    AVAILABLE, ASSIGNED, IN_TRANSIT, DELIVERED, CANCELLED
-}
